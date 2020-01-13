@@ -12,5 +12,22 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'org.springframework.boot:spring-boot-starter-web',
+            'org.springframework.boot:spring-boot-starter-aop',
+            'org.springframework.boot:spring-boot-starter-actuator',
+            'org.springframework.boot:spring-boot-autoconfigure-processor',
+            'org.springframework.boot:spring-boot-starter-freemarker',
+            'org.springframework.boot:spring-boot-starter-log4j2',
+            'org.springframework.boot:spring-boot-starter-data-redis',
+            ///////alibaba/////
+            'com.alibaba:druid-spring-boot-starter:1.1.13',
+            ///////mybatis///////
+            'p6spy:p6spy:3.8.5',
+            'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.0.0',
+            'com.baomidou:mybatis-plus-boot-starter:3.3.0',
+            'com.baomidou:mybatis-plus-generator:3.3.0',
+            'org.freemarker:freemarker:2.3.28',
+            'mysql:mysql-connector-java',
+            /////////////////////////
+            project(':common')
 }

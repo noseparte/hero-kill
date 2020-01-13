@@ -4,4 +4,5 @@ include 'game'
 include 'rpc'
 include 'battle'
 include 'match'
+include 'common'
 

@@ -1,32 +1,80 @@
-plugins {
-    id 'org.springframework.boot' version '2.2.2.RELEASE'
-    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
-    id 'java'
+buildscript {
+    ext {
+        set('springBootVersion', '2.1.3.RELEASE')
+        set('springCloudVersion', '2.1.2.RELEASE')
+        set('druidVersion', '1.1.13')
+    }
+
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
 }
 
 group = 'com.hero'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
 
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
+subprojects {
+    apply plugin: 'idea'
+    apply plugin: 'java'
+    apply plugin: 'application'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
     }
-}
 
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter'
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation('org.springframework.boot:spring-boot-starter-test') {
-        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    configurations.all {
+        exclude group: "ch.qos.logback", module: "logback-core"
+        exclude group: "ch.qos.logback", module: "logback-classic"
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-logging"
     }
+
+    repositories {
+        mavenCentral()
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+        maven { url 'https://repo.spring.io/libs-snapshot/' }
+        maven { url 'https://dl.bintray.com/umsdk/release' }
+    }
+
+    dependencies {
+        compile 'org.springframework.boot:spring-boot-starter',
+                'org.springframework.boot:spring-boot-configuration-processor',
+                'org.springframework.boot:spring-boot-test',
+                //////////consul///////
+//                "org.springframework.cloud:spring-cloud-starter-consul-discovery:${springCloudVersion}",
+//                "org.springframework.cloud:spring-cloud-starter-consul-config:${springCloudVersion}",
+                ////////log42/////
+                'org.apache.logging.log4j:log4j-api:2.11.1',
+                'org.apache.logging.log4j:log4j-core:2.11.1',// 生成代码的时候要把他注释掉
+                'org.apache.logging.log4j:log4j-slf4j-impl:2.11.1',
+                'org.apache.logging.log4j:log4j-web:2.11.1',
+                'com.lmax:disruptor:3.3.6',
+                ////////////httpclient///////////////
+                'org.apache.httpcomponents:httpclient:4.5.8',
+                'org.apache.httpcomponents:httpcore:4.4.11',
+                'org.apache.httpcomponents:httpmime:4.5.8',
+                'org.apache.httpcomponents:httpasyncclient:4.1.4',
+                ////////redis////////
+                'org.redisson:redisson-spring-boot-starter:3.10.5',
+                //////////////////////////////
+                'com.alibaba:fastjson:1.2.45',
+                'org.projectlombok:lombok:1.18.6',
+                'joda-time:joda-time:2.9.9',
+                'org.apache.commons:commons-collections4:4.1',
+                'org.apache.commons:commons-math3:3.6.1',
+                'commons-lang:commons-lang:2.6'
+
+    }
+
 }
 
-test {
-    useJUnitPlatform()
-}

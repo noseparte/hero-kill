@@ -6,8 +6,12 @@ buildscript {
     }
 
     repositories {
-        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
-        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+        maven {
+            url 'https://maven.aliyun.com/repository/public/'
+        }
+        maven {
+            url 'https://maven.aliyun.com/repository/central'
+        }
     }
 
     dependencies {
@@ -15,7 +19,7 @@ buildscript {
     }
 }
 
-group = 'com.hero'
+group = 'com.lucky'
 version = '0.0.1-SNAPSHOT'
 
 subprojects {
@@ -25,14 +29,14 @@ subprojects {
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
 
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
+    sourceCompatibility = 11
+    targetCompatibility = 11
 
-    tasks.withType(JavaCompile) {
+    tasks.withType(JavaCompile).configureEach {
         options.encoding = 'UTF-8'
     }
 
-    configurations.all {
+    configurations.configureEach {
         exclude group: "ch.qos.logback", module: "logback-core"
         exclude group: "ch.qos.logback", module: "logback-classic"
         exclude group: "org.springframework.boot", module: "spring-boot-starter-logging"
@@ -40,8 +44,12 @@ subprojects {
 
     repositories {
         mavenCentral()
-        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
-        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+        maven {
+            url 'https://maven.aliyun.com/repository/public/'
+        }
+        maven {
+            url 'https://maven.aliyun.com/repository/central'
+        }
         maven { url 'https://repo.spring.io/libs-snapshot/' }
         maven { url 'https://dl.bintray.com/umsdk/release' }
     }

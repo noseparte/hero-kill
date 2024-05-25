@@ -1,4 +1,4 @@
-package com.hk.game;
+package com.lucky.game;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

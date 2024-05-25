@@ -1,4 +1,13 @@
-
-
 game:
   poolSize: 100
+
+spring:
+  redis:
+    host: localhost
+    port: 6379
+    database: 1
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: hero-kill

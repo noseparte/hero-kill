@@ -1,0 +1,10 @@
+package faster.pb.impl;
+
+option java_outer_classname = "card";
+
+enum CardType {
+  BASIC = 0;      //常规牌
+  HERO = 1;       //武将牌
+  EQUIP = 2;      //装备牌
+  STRATEGY = 3;   //锦囊牌
+}

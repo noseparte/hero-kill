@@ -1,0 +1,3 @@
+package faster.pb.impl;
+
+option java_outer_classname = "system";
